@@ -1,0 +1,5 @@
+RewriteEngine On    # Turn on the rewriting engine
+ 
+RewriteRule ^index(.*)$ index.php [NC,L]
+RewriteRule ^api/user(.*)$ user_api.php [NC,L]
+RewriteRule ^api/country(.*)$ country_api.php [NC,L]
