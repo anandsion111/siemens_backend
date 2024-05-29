@@ -32,7 +32,7 @@ class User implements UserInterface{
         
         
     }
-
+    
     public function getUsers() {
           $query = "SELECT u.id, u.fullname, u.email, u.country_id, c.country FROM " . $this->table_name." u LEFT JOIN countries c ON u.country_id=c.id";
           $statement = $this->conn->query($query)->fetchAll();
@@ -90,6 +90,8 @@ return false;
 
 
 }
-
+ public function email_validation($email) { 
+        return (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email))?FALSE:TRUE; 
+     }
 }
 ?>

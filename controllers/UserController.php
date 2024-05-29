@@ -32,6 +32,9 @@ class UserController {
         }else if(empty($password)){
             http_response_code(BAD_REQUEST);
             echo json_encode(["status"=>BAD_REQUEST, "message" => INVALID_PASSWORD, "data"=>"{}"]);
+        }else if(!($this->user->email_validation($email))){
+            http_response_code(BAD_REQUEST);
+            echo json_encode(["status"=>BAD_REQUEST, "message" => INVALID_EMAIL, "data"=>"{}"]);
         }else{
         if ($this->user->addUser($data)) {
             http_response_code(CREATED);
@@ -77,5 +80,9 @@ class UserController {
            
         }
     }
+    
+    public function email_validation($str) { 
+        return (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $str))?FALSE:TRUE; 
+     } 
 }
 ?>
